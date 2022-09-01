@@ -127,7 +127,7 @@ class Elementor_Dyroth_Widget extends \Elementor\Widget_Base{
 					'size' => 50,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .your-class' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .image-width' => 'width: {{SIZE}}{{UNIT}};',
 				],
 				],
 				
@@ -191,7 +191,7 @@ class Elementor_Dyroth_Widget extends \Elementor\Widget_Base{
 
 		$title = $settings['title']; 
 		$excerpt = $settings['excerpt'];
-		$imageWidth = $settings['image_width'];
+		// $imageWidth = $settings['image_width'];
 		
 		?>
 
@@ -205,24 +205,32 @@ class Elementor_Dyroth_Widget extends \Elementor\Widget_Base{
 						if( $custom_post -> have_posts() ){
 							while($custom_post -> have_posts()){
 								$custom_post -> the_post();?>
-								<div class="heading thumbnail-<?php echo $imagePosition?> col-<?php echo $col; ?> " style="width:<?php echo  implode($imageWidth) ?>">
+								<div class="heading  thumbnail-<?php echo $imagePosition?> col-<?php echo $col; ?> ">
 									<?php
 									
 									if($title && !($excerpt) ){
-										the_post_thumbnail();
+										?>
+										<div class="image-width"><?php the_post_thumbnail();?></div>
+										<?php
 										the_title();
 									}
 									elseif($excerpt && !($title)) {
-										the_post_thumbnail();
+										?>
+										<div class="image-width"><?php the_post_thumbnail();?></div>
+										<?php
 										the_excerpt();
 									}
 									elseif($title && $excerpt){
-										the_post_thumbnail();
+										?>
+										<div class="image-width"><?php the_post_thumbnail();?></div>
+										<?php
 										the_title();
 										the_excerpt();
 									}
 										else {
-											the_post_thumbnail();
+											?>
+										<div class="image-width"><?php the_post_thumbnail();?></div>
+										<?php
 										};
 									
 									?>
