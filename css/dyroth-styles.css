@@ -1,0 +1,60 @@
+/* column */
+.col-0 {
+    flex: 0 0 auto;
+    width: 100%;
+}
+.col-1 {
+    flex: 0 0 auto;
+    width: 50%;
+}
+.col-2 {
+    flex: 0 0 auto;
+    width: 33.33%;
+}
+.col-3 {
+    flex: 0 0 auto;
+    width: 25%;
+}
+.col-4 {
+    flex: 0 0 auto;
+    width: 20%;
+}
+/* column */
+
+
+
+
+.container-widget{
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+
+.heading{
+text-align: center;
+padding: 20px;
+   
+   
+}
+/* thumbnail position */
+.thumbnail-1{
+    position: relative;
+    left: 20px;
+    bottom: 10px;
+}
+.thumbnail-2{
+    position: relative;
+    right: 20px;
+    bottom: 10px;
+}
+.thumbnail-0{
+    position: relative;
+    bottom: 10px;
+}
+/* end thumbnail position */
