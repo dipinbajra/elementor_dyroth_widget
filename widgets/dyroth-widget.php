@@ -124,7 +124,7 @@ class Elementor_Dyroth_Widget extends \Elementor\Widget_Base{
 				],
 				'default' => [
 					'unit' => 'px',
-					'size' => '190',
+					'size' => '',
 				],
 				'selectors' => [
 					'{{WRAPPER}} .image-width' => 'width: {{SIZE}}{{UNIT}};',
