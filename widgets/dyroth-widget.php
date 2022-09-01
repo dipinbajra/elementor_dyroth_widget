@@ -124,7 +124,7 @@ class Elementor_Dyroth_Widget extends \Elementor\Widget_Base{
 				],
 				'default' => [
 					'unit' => 'px',
-					'size' => 50,
+					'size' => 'default',
 				],
 				'selectors' => [
 					'{{WRAPPER}} .image-width' => 'width: {{SIZE}}{{UNIT}};',
@@ -205,7 +205,7 @@ class Elementor_Dyroth_Widget extends \Elementor\Widget_Base{
 						if( $custom_post -> have_posts() ){
 							while($custom_post -> have_posts()){
 								$custom_post -> the_post();?>
-								<div class="heading  thumbnail-<?php echo $imagePosition?> col-<?php echo $col; ?> ">
+								<div class="heading  thumbnail-<?php  esc_attr_e($imagePosition);?> col-<?php esc_attr_e($col); ?> ">
 									<?php
 									
 									if($title && !($excerpt) ){
