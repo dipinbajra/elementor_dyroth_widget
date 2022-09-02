@@ -53,6 +53,29 @@ class Elementor_Dyroth_Widget extends \Elementor\Widget_Base{
 				]
 			);  
 			// End heading control
+			$this->add_control(
+				'heading_alignment',
+				[
+					'type' => \Elementor\Controls_Manager::CHOOSE,
+					'label' => esc_html__( 'Alignment', 'elementor-dyroth-widget' ),
+					'options' => [
+						'left' => [
+							'title' => esc_html__( 'Left', 'elementor-dyroth-widget' ),
+							'icon' => 'eicon-text-align-left',
+						],
+						'center' => [
+							'title' => esc_html__( 'Center', 'elementor-dyroth-widget' ),
+							'icon' => 'eicon-text-align-center',
+						],
+						'right' => [
+							'title' => esc_html__( 'Right', 'elementor-dyroth-widget' ),
+							'icon' => 'eicon-text-align-right',
+						],
+					],
+					'default' => 'center',
+				]
+			);
+
 			// post per page 
 			$this->add_control(
 				'number',
@@ -172,15 +195,15 @@ class Elementor_Dyroth_Widget extends \Elementor\Widget_Base{
 		// $this->add_control(
 		// 	'date',
 		// 	[
-		// 		'label' => esc_html__( 'Date', 'plugin-name' ),
+		// 		'label' => esc_html__( 'Date', 'elementor-dyroth-widget' ),
 		// 		'type' => \Elementor\Controls_Manager::SELECT,
 		// 		'default' => '',
 		// 		'options' => [
-		// 			'hour'  => esc_html__( 'Past Hour', 'plugin-name' ),
-		// 			'day' => esc_html__( 'Past Day', 'plugin-name' ),	
-		// 			'w' => esc_html__( 'Past Week', 'plugin-name' ),	
-		// 			'monyhnum' => esc_html__( 'Past Month', 'plugin-name' ),	
-		// 			'year' => esc_html__( 'Past Year', 'plugin-name' ),	
+		// 			'hour'  => esc_html__( 'Past Hour', 'elementor-dyroth-widget' ),
+		// 			'day' => esc_html__( 'Past Day', 'elementor-dyroth-widget' ),	
+		// 			'w' => esc_html__( 'Past Week', 'elementor-dyroth-widget' ),	
+		// 			'monyhnum' => esc_html__( 'Past Month', 'elementor-dyroth-widget' ),	
+		// 			'year' => esc_html__( 'Past Year', 'elementor-dyroth-widget' ),	
 					
 					
 						
@@ -193,14 +216,14 @@ class Elementor_Dyroth_Widget extends \Elementor\Widget_Base{
 		$this->add_control(
 			'order_by',
 			[
-				'label' => esc_html__( 'Order By', 'plugin-name' ),
+				'label' => esc_html__( 'Order By', 'elementor-dyroth-widget' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'Date',
 				'options' => [
-					'date'  => esc_html__( 'Date', 'plugin-name' ),
-					'title' => esc_html__( 'Title', 'plugin-name' ),	
-					'menu_order' => esc_html__( 'Menu Order', 'plugin-name' ),
-					'rand' => esc_html__( 'Random', 'plugin-name' ),
+					'date'  => esc_html__( 'Date', 'elementor-dyroth-widget' ),
+					'title' => esc_html__( 'Title', 'elementor-dyroth-widget' ),	
+					'menu_order' => esc_html__( 'Menu Order', 'elementor-dyroth-widget' ),
+					'rand' => esc_html__( 'Random', 'elementor-dyroth-widget' ),
 						
 				],
 			]
@@ -211,12 +234,12 @@ class Elementor_Dyroth_Widget extends \Elementor\Widget_Base{
 		$this->add_control(
 			'order',
 			[
-				'label' => esc_html__( 'Order', 'plugin-name' ),
+				'label' => esc_html__( 'Order', 'elementor-dyroth-widget' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'ASC',
 				'options' => [
-					'ASC'  => esc_html__( 'ASC', 'plugin-name' ),
-					'DESC' => esc_html__( 'DESC', 'plugin-name' ),	
+					'ASC'  => esc_html__( 'ASC', 'elementor-dyroth-widget' ),
+					'DESC' => esc_html__( 'DESC', 'elementor-dyroth-widget' ),	
 				],
 			]
 		);
@@ -245,8 +268,8 @@ class Elementor_Dyroth_Widget extends \Elementor\Widget_Base{
 	//Render Function (Frontend display)
 	protected function render() {
 		$settings = $this->get_settings_for_display();//display function
-		echo '<h3>' . $settings['heading'] . '</h3>';// heading display
-
+		$heading= $settings['heading'];// heading display
+		$align = $settings['heading_alignment'];
 		$number = $settings['number'];
 
 		$col = $settings['column']; 
@@ -262,6 +285,7 @@ class Elementor_Dyroth_Widget extends \Elementor\Widget_Base{
 		$order = $settings['order'];
 		
 		?>
+		<div class="align-<?php esc_attr_e($align)?> "><h3><?php esc_attr_e($heading)?></h3></div>
 
 		<div class="container-widget">
 			
