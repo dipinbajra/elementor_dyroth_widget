@@ -53,8 +53,17 @@ class Elementor_Dyroth_Widget extends \Elementor\Widget_Base{
 				]
 			);  
 			// End heading control
-			
-			//column control
+			// post per page 
+			$this->add_control(
+				'number',
+				[
+					'type' => \Elementor\Controls_Manager::NUMBER,
+					'label' => esc_html__( 'Post per page','elementor-dyroth-widget'),
+					
+				],
+			);
+			//End post per page
+				//column control
 			$this->add_responsive_control(
 				'column',
 				[
@@ -147,16 +156,71 @@ class Elementor_Dyroth_Widget extends \Elementor\Widget_Base{
 			]
 		);
 
-		// post per page 
+		// Offset setting
 		$this->add_control(
-			'number',
+			'offset',
 			[
 				'type' => \Elementor\Controls_Manager::NUMBER,
-				'label' => esc_html__( 'Post per page','elementor-dyroth-widget'),
+				'label' => esc_html__( 'Offset','elementor-dyroth-widget'),
 				
 			],
 		);
-		//End post per page
+		
+		// End offset setting
+
+		// Date setting
+		// $this->add_control(
+		// 	'date',
+		// 	[
+		// 		'label' => esc_html__( 'Date', 'plugin-name' ),
+		// 		'type' => \Elementor\Controls_Manager::SELECT,
+		// 		'default' => '',
+		// 		'options' => [
+		// 			'hour'  => esc_html__( 'Past Hour', 'plugin-name' ),
+		// 			'day' => esc_html__( 'Past Day', 'plugin-name' ),	
+		// 			'w' => esc_html__( 'Past Week', 'plugin-name' ),	
+		// 			'monyhnum' => esc_html__( 'Past Month', 'plugin-name' ),	
+		// 			'year' => esc_html__( 'Past Year', 'plugin-name' ),	
+					
+					
+						
+		// 		],
+		// 	]
+		// );
+		// End date setting
+
+		// Order setting
+		$this->add_control(
+			'order_by',
+			[
+				'label' => esc_html__( 'Order By', 'plugin-name' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'Date',
+				'options' => [
+					'date'  => esc_html__( 'Date', 'plugin-name' ),
+					'title' => esc_html__( 'Title', 'plugin-name' ),	
+					'menu_order' => esc_html__( 'Menu Order', 'plugin-name' ),
+					'rand' => esc_html__( 'Random', 'plugin-name' ),
+						
+				],
+			]
+		);
+		// End order setting
+
+		// Order setting
+		$this->add_control(
+			'order',
+			[
+				'label' => esc_html__( 'Order', 'plugin-name' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'ASC',
+				'options' => [
+					'ASC'  => esc_html__( 'ASC', 'plugin-name' ),
+					'DESC' => esc_html__( 'DESC', 'plugin-name' ),	
+				],
+			]
+		);
+		// End order setting
 
         $this->end_controls_section();
 
@@ -191,7 +255,11 @@ class Elementor_Dyroth_Widget extends \Elementor\Widget_Base{
 
 		$title = $settings['title']; 
 		$excerpt = $settings['excerpt'];
-		// $imageWidth = $settings['image_width'];
+		$offset = $settings['offset'];
+		// $date = $settings['date'];
+		// var_dump($date); die;
+		$orderBy = $settings['order_by'];
+		$order = $settings['order'];
 		
 		?>
 
@@ -199,7 +267,7 @@ class Elementor_Dyroth_Widget extends \Elementor\Widget_Base{
 			
 				
 					<?php
-					$custom_post = new WP_Query(['post_type' => 'clients', 'posts_per_page' => $number]);
+					$custom_post = new WP_Query(['post_type' => 'clients', 'posts_per_page' => $number, 'offset'=> $offset, 'orderby' => $orderBy, 'order'=>$order]);
 						?>
 						<?php
 						if( $custom_post -> have_posts() ){
@@ -211,8 +279,9 @@ class Elementor_Dyroth_Widget extends \Elementor\Widget_Base{
 									if($title && !($excerpt) ){
 										?>
 										<div class="image-width"><?php the_post_thumbnail();?></div>
+										
+										<div class="the-title"><?php the_title();?></div>
 										<?php
-										the_title();
 									}
 									elseif($excerpt && !($title)) {
 										?>
@@ -223,8 +292,9 @@ class Elementor_Dyroth_Widget extends \Elementor\Widget_Base{
 									elseif($title && $excerpt){
 										?>
 										<div class="image-width"><?php the_post_thumbnail();?></div>
-										<?php
-										the_title();
+										
+									<div class="the-title"><?php the_title();?></div>
+									<?php
 										the_excerpt();
 									}
 										else {

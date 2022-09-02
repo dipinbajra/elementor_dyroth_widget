@@ -25,15 +25,20 @@
 
 
 .container-widget{
-    --bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 0;
-    width: 60%;
-    margin-right: auto;
-    margin-left: auto;
+    width: 800px;
+    padding: 0;
+    margin: 0 auto;
+    list-style: none;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
+
 }
 
+.container-widget .heading .image-width img{
+    object-fit:contain ;
+}
 
 
 .heading{
@@ -58,3 +63,7 @@ padding: 20px;
     bottom: 10px;
 }
 /* end thumbnail position */
+
+.container-widget .heading .the-title{
+    text-align: center;
+}
